@@ -14,17 +14,17 @@ Luego se eliminó y descató todas las filas del DataFrame df que tienen valores
 Se decidió usar exclusivamente la columna text como entrada del modelo.
 Esto se debe a que el objetivo principal es identificar rumores a partir del contenido semántico del mensaje, sin depender del usuario o del tema, que podrían introducir sesgos.
 
-Se empleó CountVectorizer para convertir los textos en representaciones numéricas basadas en la frecuencia de palabras.
-Se limitaron a 10.000 características (palabras únicas) para optimizar el rendimiento y evitar sobreajuste.
+El conjunto de datos se divide en: 75% entrenamiento (x_train, y_train) y 25% prueba (x_test, y_test)
 
-Se utilizó una Regresión Logística (Logistic Regression) por ser un modelo interpretable, rápido de entrenar y muy adecuado para tareas de clasificación binaria.
-El conjunto de entrenamiento se dividió en 80% para entrenamiento y 20% para validación.
+random_state=42 se usa para mantener resultados reproducibles.
+La variable text representa las entradas (lo que el modelo lee).
+La variable topic representa las salidas (lo que el modelo debe aprender a predecir).
 
-El modelo se evaluó mediante:
-
-Accuracy: mide el porcentaje de aciertos globales.
-
-F1-score: evalúa el equilibrio entre precisión y exhaustividad, especialmente útil en clases desbalanceadas.
+Como los algoritmos de Machine Learning no pueden procesar texto directamente, se utiliza CountVectorizer para convertir las palabras en valores numéricos (frecuencias de aparición).
+Este proceso genera una matriz de características que representa cada publicación como un conjunto de números.
+Se entrena un modelo de Regresión Logística, una técnica clásica y efectiva para problemas de clasificación.
+El modelo aprende a asociar los patrones de palabras (vectorizadas) con los distintos temas (topic).
+El modelo se evaluó mediante: Accuracy: mide el porcentaje de aciertos globales y F1-score: evalúa el equilibrio entre precisión y exhaustividad, especialmente útil en clases desbalanceadas.
 
 Ambas métricas permitieron validar la efectividad del modelo antes de aplicarlo al dataset de prueba.
 
